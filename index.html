@@ -77,7 +77,7 @@
                 <button id="nego" onclick="goBack()">Nego Gaji Anda</button>
             `;
         }
-        
+
         function moveButton() {
             let btn = document.getElementById("tidak");
             let x = Math.random() * (window.innerWidth - btn.offsetWidth);
@@ -90,6 +90,15 @@
         function goBack() {
             window.location.reload();
         }
+
+        // Tambahkan event listener untuk touch event di perangkat mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            let btnTidak = document.getElementById("tidak");
+            btnTidak.addEventListener('touchstart', function(event) {
+                event.preventDefault(); // Mencegah default behavior
+                moveButton();
+            });
+        });
     </script>
 </head>
 <body>
