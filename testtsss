@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apakah Anda Puas dengan Gaji Anda?</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 100px;
+        }
+        #container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+        }
+        #iya {
+            background-color: green;
+            color: white;
+        }
+        #tidak {
+            background-color: red;
+            color: white;
+            position: absolute;
+        }
+    </style>
+    <script>
+        function goToNextPage() {
+            document.body.innerHTML = "<h1>BAGUS, silahkan kembali bekerja, jangan lupa input transaksi anda di cermat-cloud, hehehehee</h1>";
+        }
+        
+        function moveButton() {
+            let btn = document.getElementById("tidak");
+            let x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            let y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.left = x + "px";
+            btn.style.top = y + "px";
+        }
+    </script>
+</head>
+<body>
+    <h1>Apakah Anda Puas dengan Gaji Anda Saat Ini?</h1>
+    <div id="container">
+        <button id="iya" onclick="goToNextPage()">Iya</button>
+        <button id="tidak" onmouseover="moveButton()">Tidak</button>
+    </div>
+</body>
+</html>
