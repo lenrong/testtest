@@ -7,49 +7,99 @@
     <style>
         body {
             text-align: center;
-            font-family: Arial, sans-serif;
-            margin-top: 100px;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #87CEEB, #1E90FF);
+            color: white;
+        }
+        h1 {
+            font-size: 2.5em;
+            animation: fadeIn 2s ease-in-out;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            animation: fadeIn 3s ease-in-out;
         }
         #container {
             display: flex;
             justify-content: center;
             gap: 20px;
+            margin-top: 20px;
         }
         button {
-            padding: 10px 20px;
+            padding: 15px 30px;
             font-size: 18px;
             cursor: pointer;
             border: none;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: white;
         }
         #iya {
-            background-color: green;
-            color: white;
+            background-color: #32CD32;
+        }
+        #iya:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #32CD32;
         }
         #tidak {
-            background-color: red;
-            color: white;
-            position: absolute;
+            background-color: #FF4500;
+        }
+        #tidak:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #FF4500;
+        }
+        #nego {
+            background-color: #1E90FF;
+            margin-top: 20px;
+        }
+        #nego:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #1E90FF;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
     <script>
         function goToNextPage() {
-            document.body.innerHTML = "<h1>BAGUS, silahkan kembali bekerja, jangan lupa input transaksi anda di cermat-cloud, hehehehee</h1>";
+            document.body.innerHTML = `
+                <h1>BAGUS, silahkan kembali bekerja!</h1>
+                <p>Jangan lupa input transaksi Anda di Cermat-Cloud, hehehehee</p>
+                <button id="nego" onclick="goBack()">Nego Gaji Anda</button>
+            `;
         }
         
         function moveButton() {
             let btn = document.getElementById("tidak");
             let x = Math.random() * (window.innerWidth - btn.offsetWidth);
             let y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = "absolute";
             btn.style.left = x + "px";
             btn.style.top = y + "px";
+        }
+
+        function goBack() {
+            window.location.reload();
         }
     </script>
 </head>
 <body>
-    <h1>Apakah Anda Puas dengan Gaji Anda Saat Ini?</h1>
-    <div id="container">
-        <button id="iya" onclick="goToNextPage()">Iya</button>
-        <button id="tidak" onmouseover="moveButton()">Tidak</button>
+    <div>
+        <h1>Apakah Anda Puas dengan Gaji Anda Saat Ini?</h1>
+        <p>Pilih jawaban Anda di bawah ini:</p>
+        <div id="container">
+            <button id="tidak" onmouseover="moveButton()">Tidak</button>
+            <button id="iya" onclick="goToNextPage()">Iya</button>
+        </div>
     </div>
 </body>
 </html>
