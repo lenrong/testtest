@@ -1,6 +1,7 @@
 const player = document.getElementById('player');
 const obstacle = document.getElementById('obstacle');
 const scoreDisplay = document.getElementById('score');
+const startButton = document.getElementById('startButton');
 
 let playerPosition = 50; // Percentage of screen width (0-100)
 let score = 0;
@@ -10,6 +11,24 @@ let obstaclePosition = 100; // Initial position of the obstacle outside the scre
 // Set initial position for obstacle
 obstacle.style.left = obstaclePosition + '%';
 
+// Function to start the game
+function startGame() {
+    gameOver = false;
+    score = 0;
+    scoreDisplay.textContent = `Score: ${score}`;
+    obstaclePosition = 100; // Reset obstacle position
+
+    // Hide the start button after starting the game
+    startButton.style.display = 'none';
+
+    // Start moving the obstacle
+    setInterval(moveObstacle, 20);
+
+    // Listen for player movement
+    document.addEventListener('keydown', movePlayer);
+}
+
+// Function to move the player
 function movePlayer(event) {
     if (gameOver) return;
 
@@ -22,6 +41,7 @@ function movePlayer(event) {
     player.style.left = playerPosition + "%";
 }
 
+// Function to move the obstacle
 function moveObstacle() {
     if (gameOver) return;
 
@@ -35,17 +55,13 @@ function moveObstacle() {
 
     obstacle.style.left = obstaclePosition + "%";
 
-    // Check for collision only when the obstacle is in range of the player
+    // Check for collision
     if (obstaclePosition >= playerPosition - 5 && obstaclePosition <= playerPosition + 50) {
         gameOver = true;
         alert("Game Over! Final Score: " + score);
+        startButton.style.display = 'block'; // Show the start button again
     }
 }
 
-// Initialize player and obstacle movements
-document.addEventListener('keydown', movePlayer);
-
-// Start the game loop after a small delay to ensure the game is properly initialized
-setTimeout(() => {
-    setInterval(moveObstacle, 20);
-}, 500); // Delay to avoid immediate collision check
+// Attach the start game function to the button
+startButton.addEventListener('click', startGame);
