@@ -15,68 +15,97 @@ body {
     margin: 0;
 }
 
+.container {
+    display: flex;
+    gap: 20px;
+}
+
 .game-container {
-    position: relative;
     width: 500px;
-    height: 600px;
+    height: 400px;
     background-color: #fff;
     border-radius: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    padding: 20px;
+    text-align: center;
 }
 
-.player {
-    position: absolute;
-    bottom: 20px;
-    width: 50px; /* Lebar player dalam piksel */
-    height: 50px;
-    background-color: #3498db;
+.nickname-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nickname-input input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    transition: left 0.1s linear;
 }
 
-.obstacle {
-    position: absolute;
-    top: 0;
-    width: 50px; /* Lebar obstacle dalam piksel */
-    height: 50px;
-    background-color: #e74c3c;
-    border-radius: 5px;
-    transition: left 0.1s linear;
-}
-
-.score {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 20px;
-    color: #333;
-    font-weight: bold;
-}
-
-#startButton {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 60px;
-    font-size: 24px;
+.nickname-input button {
+    padding: 10px;
+    font-size: 16px;
     background-color: #2ecc71;
     color: white;
     border: none;
-    border-radius: 30px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
 }
 
-#startButton:hover {
+.nickname-input button:hover {
     background-color: #27ae60;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    transform: translate(-50%, -50%) scale(1.05);
 }
 
-#startButton:active {
-    transform: translate(-50%, -50%) scale(0.98);
+.game {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.question {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option {
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.option:hover {
+    background-color: #2980b9;
+}
+
+.timer, .score {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.ranking-container {
+    width: 300px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.ranking-container h2 {
+    margin-bottom: 10px;
+}
+
+#rankingList {
+    list-style-type: decimal;
+    padding-left: 20px;
 }
