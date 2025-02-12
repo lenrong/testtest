@@ -7,6 +7,7 @@ let playerPosition = 50; // Percentage of screen width (0-100)
 let score = 0;
 let gameOver = false;
 let obstaclePosition = 100; // Initial position of the obstacle outside the screen
+let obstacleSpeed = 2; // Kecepatan obstacle
 
 // Set initial position for obstacle
 obstacle.style.left = obstaclePosition + '%';
@@ -16,7 +17,7 @@ function startGame() {
     gameOver = false;
     score = 0;
     scoreDisplay.textContent = `Score: ${score}`;
-    obstaclePosition = 100; // Reset obstacle position
+    obstaclePosition = 100; // Reset obstacle position to outside the screen
 
     // Hide the start button after starting the game
     startButton.style.display = 'none';
@@ -45,7 +46,7 @@ function movePlayer(event) {
 function moveObstacle() {
     if (gameOver) return;
 
-    obstaclePosition -= 2; // Move the obstacle to the left
+    obstaclePosition -= obstacleSpeed; // Move the obstacle to the left
 
     if (obstaclePosition <= -50) {
         obstaclePosition = 100; // Reset the obstacle to the right
