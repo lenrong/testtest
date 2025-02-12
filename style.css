@@ -63,23 +63,32 @@ body {
 
 #startButton {
     position: absolute;
-    bottom: 100px;
-    padding: 12px 30px;
-    font-size: 18px;
+    width: 200px; /* Membuat tombol lebih besar */
+    height: 60px; /* Membuat tombol lebih besar */
+    font-size: 24px; /* Membuat teks lebih besar */
     background-color: #2ecc71;
     color: white;
     border: none;
     border-radius: 30px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
 }
 
 #startButton:hover {
     background-color: #27ae60;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 #startButton:focus {
     outline: none;
+}
+
+#startButton:active {
+    transform: scale(0.98); /* Memberikan efek tombol ditekan */
 }
