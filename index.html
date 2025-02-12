@@ -3,15 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stres Game</title>
+    <title>Kuis Cepat</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="game-container">
-        <div class="player" id="player"></div>
-        <div class="obstacle" id="obstacle"></div>
-        <div class="score" id="score">Score: 0</div>
-        <button id="startButton">Mulai Game</button>
+    <div class="container">
+        <div class="game-container">
+            <div id="nicknameInput" class="nickname-input">
+                <input type="text" id="nickname" placeholder="Masukkan Nickname" maxlength="20">
+                <button id="startButton">Mulai Kuis</button>
+            </div>
+            <div id="game" class="game" style="display: none;">
+                <div id="question" class="question"></div>
+                <div id="options" class="options"></div>
+                <div id="timer" class="timer">Waktu: 10</div>
+                <div id="score" class="score">Skor: 0</div>
+            </div>
+        </div>
+        <div class="ranking-container">
+            <h2>Top 10 Ranking</h2>
+            <ol id="rankingList"></ol>
+        </div>
     </div>
 
     <script src="script.js"></script>
