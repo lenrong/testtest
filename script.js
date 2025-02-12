@@ -5,6 +5,10 @@ const scoreDisplay = document.getElementById('score');
 let playerPosition = 50; // Percentage of screen width (0-100)
 let score = 0;
 let gameOver = false;
+let obstaclePosition = 100; // Initial position of the obstacle outside the screen
+
+// Set initial position for obstacle
+obstacle.style.left = obstaclePosition + '%';
 
 function movePlayer(event) {
     if (gameOver) return;
@@ -21,17 +25,17 @@ function movePlayer(event) {
 function moveObstacle() {
     if (gameOver) return;
 
-    let obstaclePosition = parseInt(obstacle.style.left) || 100;
-    obstaclePosition -= 2;
+    obstaclePosition -= 2; // Move the obstacle to the left
 
     if (obstaclePosition <= -50) {
-        obstaclePosition = 100;
+        obstaclePosition = 100; // Reset the obstacle to the right
         score++;
         scoreDisplay.textContent = `Score: ${score}`;
     }
 
     obstacle.style.left = obstaclePosition + "%";
 
+    // Check for collision only when the obstacle is in range of the player
     if (
         obstaclePosition >= playerPosition && 
         obstaclePosition <= playerPosition + 5
@@ -41,6 +45,6 @@ function moveObstacle() {
     }
 }
 
+// Initialize player and obstacle movements
 document.addEventListener('keydown', movePlayer);
-
 setInterval(moveObstacle, 20);
