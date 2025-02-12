@@ -1,4 +1,3 @@
-
 const player = document.getElementById('player');
 const obstacle = document.getElementById('obstacle');
 const scoreDisplay = document.getElementById('score');
