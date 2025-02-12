@@ -3,30 +3,30 @@ const obstacle = document.getElementById('obstacle');
 const scoreDisplay = document.getElementById('score');
 const startButton = document.getElementById('startButton');
 
-let playerPosition = 50; // Percentage of screen width (0-100)
+let playerPosition = 225; // Posisi awal player dalam piksel (dari kiri)
 let score = 0;
 let gameOver = false;
-let obstaclePosition = 100;
-let obstacleSpeed = 2;
+let obstaclePosition = 500; // Posisi awal obstacle dalam piksel (dari kiri)
+let obstacleSpeed = 2; // Kecepatan obstacle
 let obstacleInterval;
 
 // Set initial positions
-player.style.left = playerPosition + '%';
-obstacle.style.left = obstaclePosition + '%';
+player.style.left = playerPosition + 'px';
+obstacle.style.left = obstaclePosition + 'px';
 
 // Function to start the game
 function startGame() {
     gameOver = false;
     score = 0;
     scoreDisplay.textContent = `Score: ${score}`;
-    obstaclePosition = 100;
-    obstacle.style.left = obstaclePosition + '%';
+    obstaclePosition = 500; // Reset obstacle position
+    obstacle.style.left = obstaclePosition + 'px';
     startButton.style.display = 'none';
-    
+
     // Clear existing interval before starting new one
     if (obstacleInterval) clearInterval(obstacleInterval);
     obstacleInterval = setInterval(moveObstacle, 20);
-    
+
     document.addEventListener('keydown', movePlayer);
 }
 
@@ -35,12 +35,12 @@ function movePlayer(event) {
     if (gameOver) return;
 
     if (event.key === "ArrowLeft" && playerPosition > 0) {
-        playerPosition -= 5;
-    } else if (event.key === "ArrowRight" && playerPosition < 95) {
-        playerPosition += 5;
+        playerPosition -= 10; // Gerak ke kiri
+    } else if (event.key === "ArrowRight" && playerPosition < 450) {
+        playerPosition += 10; // Gerak ke kanan
     }
 
-    player.style.left = playerPosition + "%";
+    player.style.left = playerPosition + 'px';
 }
 
 // Function to move the obstacle
@@ -50,23 +50,24 @@ function moveObstacle() {
         return;
     }
 
-    obstaclePosition -= obstacleSpeed;
-    
+    obstaclePosition -= obstacleSpeed; // Gerak obstacle ke kiri
+
     if (obstaclePosition <= -50) {
-        obstaclePosition = 100;
+        obstaclePosition = 500; // Reset obstacle ke kanan
         score++;
         scoreDisplay.textContent = `Score: ${score}`;
     }
 
-    obstacle.style.left = obstaclePosition + "%";
+    obstacle.style.left = obstaclePosition + 'px';
 
-    // Perbaikan deteksi tabrakan
-    const playerRight = playerPosition + 5; // Asumsi lebar player 5%
-    const obstacleRight = obstaclePosition + 50; // Asumsi lebar obstacle 50%
-    
+    // Deteksi tabrakan
+    const playerRect = player.getBoundingClientRect();
+    const obstacleRect = obstacle.getBoundingClientRect();
+
     if (
-        playerPosition < obstacleRight &&
-        playerRight > obstaclePosition
+        playerRect.left < obstacleRect.right &&
+        playerRect.right > obstacleRect.left &&
+        playerRect.bottom > obstacleRect.top
     ) {
         gameOver = true;
         alert("Game Over! Final Score: " + score);
@@ -75,4 +76,5 @@ function moveObstacle() {
     }
 }
 
+// Attach the start game function to the button
 startButton.addEventListener('click', startGame);
