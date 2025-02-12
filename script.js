@@ -6,11 +6,12 @@ const startButton = document.getElementById('startButton');
 let playerPosition = 50; // Percentage of screen width (0-100)
 let score = 0;
 let gameOver = false;
-let obstaclePosition = 100; // Initial position of the obstacle outside the screen
-let obstacleSpeed = 2; // Kecepatan obstacle
+let obstaclePosition = 100;
+let obstacleSpeed = 2;
 let obstacleInterval;
 
-// Set initial position for obstacle
+// Set initial positions
+player.style.left = playerPosition + '%';
 obstacle.style.left = obstaclePosition + '%';
 
 // Function to start the game
@@ -18,16 +19,14 @@ function startGame() {
     gameOver = false;
     score = 0;
     scoreDisplay.textContent = `Score: ${score}`;
-    obstaclePosition = 100; // Reset obstacle position to outside the screen
+    obstaclePosition = 100;
     obstacle.style.left = obstaclePosition + '%';
-
-    // Hide the start button after starting the game
     startButton.style.display = 'none';
-
-    // Start moving the obstacle
-    obstacleInterval = setInterval(moveObstacle, 20); // Start the interval to move obstacle
-
-    // Listen for player movement
+    
+    // Clear existing interval before starting new one
+    if (obstacleInterval) clearInterval(obstacleInterval);
+    obstacleInterval = setInterval(moveObstacle, 20);
+    
     document.addEventListener('keydown', movePlayer);
 }
 
@@ -47,27 +46,33 @@ function movePlayer(event) {
 // Function to move the obstacle
 function moveObstacle() {
     if (gameOver) {
-        clearInterval(obstacleInterval); // Stop obstacle movement when game is over
+        clearInterval(obstacleInterval);
         return;
     }
 
-    obstaclePosition -= obstacleSpeed; // Move the obstacle to the left
-
+    obstaclePosition -= obstacleSpeed;
+    
     if (obstaclePosition <= -50) {
-        obstaclePosition = 100; // Reset the obstacle to the right
+        obstaclePosition = 100;
         score++;
         scoreDisplay.textContent = `Score: ${score}`;
     }
 
     obstacle.style.left = obstaclePosition + "%";
 
-    // Check for collision
-    if (obstaclePosition >= playerPosition - 5 && obstaclePosition <= playerPosition + 50) {
+    // Perbaikan deteksi tabrakan
+    const playerRight = playerPosition + 5; // Asumsi lebar player 5%
+    const obstacleRight = obstaclePosition + 50; // Asumsi lebar obstacle 50%
+    
+    if (
+        playerPosition < obstacleRight &&
+        playerRight > obstaclePosition
+    ) {
         gameOver = true;
         alert("Game Over! Final Score: " + score);
-        startButton.style.display = 'block'; // Show the start button again
+        startButton.style.display = 'block';
+        document.removeEventListener('keydown', movePlayer);
     }
 }
 
-// Attach the start game function to the button
 startButton.addEventListener('click', startGame);
