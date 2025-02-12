@@ -23,30 +23,26 @@ body {
     border-radius: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 
 .player {
     position: absolute;
     bottom: 20px;
-    width: 5%; /* Sesuai dengan asumsi 5% di JavaScript */
+    width: 50px; /* Lebar player dalam piksel */
     height: 50px;
     background-color: #3498db;
     border-radius: 5px;
-    transition: left 0.1s linear; /* Animasi lebih responsif */
+    transition: left 0.1s linear;
 }
 
 .obstacle {
     position: absolute;
-    bottom: 20px; /* Posisi sama dengan player */
-    width: 50%; /* Sesuai dengan asumsi 50% di JavaScript */
+    top: 0;
+    width: 50px; /* Lebar obstacle dalam piksel */
     height: 50px;
     background-color: #e74c3c;
     border-radius: 5px;
-    transition: left 0.1s linear; /* Animasi lebih responsif */
+    transition: left 0.1s linear;
 }
 
 .score {
@@ -60,6 +56,9 @@ body {
 
 #startButton {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 200px;
     height: 60px;
     font-size: 24px;
@@ -70,28 +69,14 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
 }
 
 #startButton:hover {
     background-color: #27ae60;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    transform: translateY(-2px);
+    transform: translate(-50%, -50%) scale(1.05);
 }
 
 #startButton:active {
-    transform: scale(0.98) translateY(0);
-}
-
-/* Menambahkan track/lintasan untuk visual yang lebih baik */
-.game-track {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 80px;
-    background: #f1f2f6;
-    border-top: 3px dashed #dfe4ea;
+    transform: translate(-50%, -50%) scale(0.98);
 }
