@@ -27,29 +27,26 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    transition: transform 0.3s ease-in-out;
 }
 
 .player {
     position: absolute;
     bottom: 20px;
-    left: 50%;
-    width: 50px;
+    width: 5%; /* Sesuai dengan asumsi 5% di JavaScript */
     height: 50px;
     background-color: #3498db;
     border-radius: 5px;
-    transition: left 0.2s ease-in-out;
+    transition: left 0.1s linear; /* Animasi lebih responsif */
 }
 
 .obstacle {
     position: absolute;
-    top: 0;
-    left: 100%;
-    width: 50px;
+    bottom: 20px; /* Posisi sama dengan player */
+    width: 50%; /* Sesuai dengan asumsi 50% di JavaScript */
     height: 50px;
     background-color: #e74c3c;
     border-radius: 5px;
-    transition: left 0.2s ease-in-out;
+    transition: left 0.1s linear; /* Animasi lebih responsif */
 }
 
 .score {
@@ -63,32 +60,38 @@ body {
 
 #startButton {
     position: absolute;
-    width: 200px; /* Membuat tombol lebih besar */
-    height: 60px; /* Membuat tombol lebih besar */
-    font-size: 24px; /* Membuat teks lebih besar */
+    width: 200px;
+    height: 60px;
+    font-size: 24px;
     background-color: #2ecc71;
     color: white;
     border: none;
     border-radius: 30px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 1;
+    z-index: 2;
 }
 
 #startButton:hover {
     background-color: #27ae60;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-}
-
-#startButton:focus {
-    outline: none;
+    transform: translateY(-2px);
 }
 
 #startButton:active {
-    transform: scale(0.98); /* Memberikan efek tombol ditekan */
+    transform: scale(0.98) translateY(0);
+}
+
+/* Menambahkan track/lintasan untuk visual yang lebih baik */
+.game-track {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    background: #f1f2f6;
+    border-top: 3px dashed #dfe4ea;
 }
