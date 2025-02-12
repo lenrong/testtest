@@ -8,6 +8,7 @@ let score = 0;
 let gameOver = false;
 let obstaclePosition = 100; // Initial position of the obstacle outside the screen
 let obstacleSpeed = 2; // Kecepatan obstacle
+let obstacleInterval;
 
 // Set initial position for obstacle
 obstacle.style.left = obstaclePosition + '%';
@@ -18,12 +19,13 @@ function startGame() {
     score = 0;
     scoreDisplay.textContent = `Score: ${score}`;
     obstaclePosition = 100; // Reset obstacle position to outside the screen
+    obstacle.style.left = obstaclePosition + '%';
 
     // Hide the start button after starting the game
     startButton.style.display = 'none';
 
     // Start moving the obstacle
-    setInterval(moveObstacle, 20);
+    obstacleInterval = setInterval(moveObstacle, 20); // Start the interval to move obstacle
 
     // Listen for player movement
     document.addEventListener('keydown', movePlayer);
@@ -44,7 +46,10 @@ function movePlayer(event) {
 
 // Function to move the obstacle
 function moveObstacle() {
-    if (gameOver) return;
+    if (gameOver) {
+        clearInterval(obstacleInterval); // Stop obstacle movement when game is over
+        return;
+    }
 
     obstaclePosition -= obstacleSpeed; // Move the obstacle to the left
 
