@@ -36,10 +36,7 @@ function moveObstacle() {
     obstacle.style.left = obstaclePosition + "%";
 
     // Check for collision only when the obstacle is in range of the player
-    if (
-        obstaclePosition >= playerPosition && 
-        obstaclePosition <= playerPosition + 5
-    ) {
+    if (obstaclePosition >= playerPosition - 5 && obstaclePosition <= playerPosition + 50) {
         gameOver = true;
         alert("Game Over! Final Score: " + score);
     }
@@ -47,4 +44,8 @@ function moveObstacle() {
 
 // Initialize player and obstacle movements
 document.addEventListener('keydown', movePlayer);
-setInterval(moveObstacle, 20);
+
+// Start the game loop after a small delay to ensure the game is properly initialized
+setTimeout(() => {
+    setInterval(moveObstacle, 20);
+}, 500); // Delay to avoid immediate collision check
